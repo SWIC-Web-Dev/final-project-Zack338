@@ -1,19 +1,17 @@
 import React from 'react';
+import Item from './Item';
 import stateManager from '../state/stateManager';
 
-function Item({ item, index }) {
-  const handleDelete = () => {
-    const { items } = stateManager.getState();
-    items.splice(index, 1);
-    stateManager.setState({ items });
-  };
+function ItemList() {
+  const { items } = stateManager.getState();
 
   return (
-    <li className="flex justify-between items-center p-2 border-b">
-      <span>{item}</span>
-      <button className="bg-red-500 text-white p-1" onClick={handleDelete}>Delete</button>
-    </li>
+    <ul>
+      {items.map((item, index) => (
+        <Item key={index} item={item} index={index} />
+      ))}
+    </ul>
   );
 }
 
-export default Item;
+export default ItemList; 
